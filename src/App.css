@@ -1,42 +1,121 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
+/* GLOBAL */
+body {
+  font-family: "Poppins", sans-serif;
+  background-color: #a1c4fd;
+  margin: 0;
+  padding: 0;
+  color: #1a1a1a;
+}
+
+.app-container {
   text-align: center;
+  background-color: #87cefa;
+  min-height: 100vh;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+/* =============== HEADER / SEARCH =============== */
+.search-box {
+  background-color: #6b8fd6;
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.search-box input {
+  padding: 10px 16px;
+  font-size: 16px;
+  border-radius: 8px;
+  border: none;
+  outline: none;
+  width: 220px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+.search-box button {
+  background-color: #4d6fc1;
+  border: none;
+  color: white;
+  font-size: 15px;
+  padding: 10px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s ease;
 }
 
-.card {
-  padding: 2em;
+.search-box button:hover {
+  background-color: #3b5aa3;
 }
 
-.read-the-docs {
-  color: #888;
+/* =============== CURRENT WEATHER CARD =============== */
+.weather-card {
+  background-color: #87cefa;
+  padding: 40px 20px 20px;
+  border-radius: 12px;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.weather-icon {
+  width: 120px;
+  height: 120px;
+}
+
+.weather-card h2 {
+  margin: 15px 0 5px;
+  font-size: 1.8rem;
+  text-transform: capitalize;
+}
+
+.weather-desc {
+  font-size: 1.1rem;
+  color: #fff;
+  text-transform: capitalize;
+}
+
+.weather-stats {
+  margin-top: 20px;
+  font-size: 1rem;
+  color: #0a0a0a;
+}
+
+.weather-stats p {
+  margin: 5px 0;
+}
+
+.temp-range {
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
+/* =============== FORECAST SECTION =============== */
+.forecast-card {
+  background-color: #87cefa;
+  padding: 20px;
+  margin-top: 20px;
+}
+
+.forecast-list {
+  display: flex;
+  justify-content: center;
+  gap: 25px;
+  flex-wrap: wrap;
+}
+
+.forecast-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+  color: #0a0a0a;
+}
+
+.forecast-item img {
+  width: 50px;
+  height: 50px;
+}
+
+.forecast-item p {
+  margin: 0;
+  font-size: 0.9rem;
 }

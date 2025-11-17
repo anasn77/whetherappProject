@@ -1,35 +1,52 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState } from "react";
+import "./App.css";
+import WeatherForm from "./Weatherform";
+import WeatherDisplay from "./WeatherDisplay";
+import ForecastDisplay from "./ForecastDisplay";
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [city, setCity] = useState("");
+  const [weather, setWeather] = useState(null);
+  const [forecast, setForecast] = useState(null);
+
+  const API_KEY = "904cbe951d0e88d35e49e99177ed0a6d";
+
+  const getWeather = async () => {
+    if (!city) return;
+
+    // Fetch current weather
+    const weatherResponse = await fetch(
+      `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}&units=metric`
+    );
+    const weatherData = await weatherResponse.json();
+
+    if (weatherData.cod === 200) {
+      setWeather(weatherData);
+    } else {
+      alert("City not found!");
+      setWeather(null);
+      setForecast(null);
+      return;
+    }
+
+    // Fetch 24-hour forecast (3-hour intervals)
+    const forecastResponse = await fetch(
+      `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${API_KEY}&units=metric`
+    );
+    const forecastData = await forecastResponse.json();
+
+    if (forecastData.cod === "200") {
+      setForecast(forecastData.list.slice(0, 8)); // next 24h (8x3h)
+    }
+  };
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <div className="app-container">
+      <WeatherForm city={city} setCity={setCity} getWeather={getWeather} />
+      <WeatherDisplay weather={weather} />
+      <ForecastDisplay forecast={forecast} />
+    </div>
+  );
 }
 
-export default App
+export default App;
