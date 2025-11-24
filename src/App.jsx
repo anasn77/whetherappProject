@@ -1,18 +1,22 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./App.css";
 import WeatherForm from "./Weatherform";
 import WeatherDisplay from "./WeatherDisplay";
 import ForecastDisplay from "./ForecastDisplay";
 
 function App() {
-  const [city, setCity] = useState("");
+  const [city, setCity] = useState("Tripoli");
+    // Fetch Tripoli weather on first load
+    useEffect(() => {
+      getWeather();
+    }, []);
   const [weather, setWeather] = useState(null);
   const [forecast, setForecast] = useState(null);
-
   const API_KEY = "904cbe951d0e88d35e49e99177ed0a6d";
 
   const getWeather = async () => {
-    if (!city) return;
+    if (!city) 
+      return;
 
     // Fetch current weather
     const weatherResponse = await fetch(
@@ -22,7 +26,8 @@ function App() {
 
     if (weatherData.cod === 200) {
       setWeather(weatherData);
-    } else {
+    } 
+    else {
       alert("City not found!");
       setWeather(null);
       setForecast(null);
@@ -40,8 +45,21 @@ function App() {
     }
   };
 
+  // Choose a background CSS class based on the main weather description
+  const getBackgroundClass = (weatherObj) => {
+    if (!weatherObj || !weatherObj.weather || !weatherObj.weather[0]) return "bg-default";
+    const main = (weatherObj.weather[0].main || "").toLowerCase();
+    if (main === "clear") return "bg-clear";
+    if (main === "clouds") return "bg-clouds";
+    if (main === "rain" || main === "drizzle") return "bg-rain";
+    if (main === "snow") return "bg-snow";
+    if (main === "fog" || main === "mist" || main === "haze") return "bg-fog";
+    if (main === "thunderstorm") return "bg-thunderstorm";
+    return "bg-default";
+  };
+
   return (
-    <div className="app-container">
+    <div className={`app-container ${getBackgroundClass(weather)}`}>
       <WeatherForm city={city} setCity={setCity} getWeather={getWeather} />
       <WeatherDisplay weather={weather} />
       <ForecastDisplay forecast={forecast} />

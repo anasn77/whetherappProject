@@ -13,6 +13,30 @@ body {
   min-height: 100vh;
 }
 
+/* Background classes for different main weather conditions */
+.bg-clear {
+  background: linear-gradient(180deg, #87cefa 0%, #a1d8ff 100%);
+}
+.bg-clouds {
+  background: linear-gradient(180deg, #cfd9df 0%, #e2ebf0 100%);
+}
+.bg-rain {
+  background: linear-gradient(180deg, #4e6fa3 0%, #2b4f7a 100%);
+}
+.bg-snow {
+  background: linear-gradient(180deg, #e6f0f8 0%, #cfeafc 100%);
+}
+.bg-fog {
+  background: linear-gradient(180deg, #bfc0c1 0%, #d7d7d8 100%);
+}
+.bg-thunderstorm {
+  background: linear-gradient(180deg, #3b4653 0%, #1f2a33 100%);
+  color: #fff;
+}
+.bg-default {
+  background: linear-gradient(180deg, #87cefa 0%, #a1c4fd 100%);
+}
+
 /* =============== HEADER / SEARCH =============== */
 .search-box {
   background-color: #6b8fd6;
